@@ -55,7 +55,6 @@ namespace Buffalo
                             },
                             License = new OpenApiLicense
                             {
-                    
                                 Name = "Copyright by Binh Nguyen",
                             }
                         });
@@ -92,11 +91,9 @@ namespace Buffalo
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-         
                 c.DocumentTitle = "Buffalo Document";
-                c.SwaggerEndpoint("v5/swagger.json", "My API V5");
-                //c.RoutePrefix = string.Empty;
-                //c.SwaggerEndpoint("../swagger/v5/swagger.json", "My API V5");
+                c.SwaggerEndpoint("/swagger/v5/swagger.json", "My API V5");
+                c.RoutePrefix = "buffalo-api";
             });
 
             app.UseRouting();
