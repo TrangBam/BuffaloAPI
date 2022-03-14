@@ -33,7 +33,7 @@ namespace EntityFrameworkCore.Contexts
                 .AddJsonFile("connectionconfig.json", false, true)
                 .Build();
             var connectionString = configuration.GetConnectionStringByEnv();
-            optionsBuilder.UseSqlServer(connectionString);
+            optionsBuilder.UseNpgsql(connectionString);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

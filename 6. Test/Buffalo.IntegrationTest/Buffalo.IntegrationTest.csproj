@@ -21,4 +21,8 @@
     <ProjectReference Include="..\..\1. Web\Buffalo\BuffaloAPI.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controller\" />
+  </ItemGroup>
+
 </Project>

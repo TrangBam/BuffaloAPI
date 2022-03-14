@@ -19,4 +19,9 @@
     <ProjectReference Include="..\..\1. Web\Buffalo\BuffaloAPI.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Services\Login\" />
+    <Folder Include="Services\User\" />
+  </ItemGroup>
+
 </Project>

@@ -7,6 +7,8 @@ using Entities.Buffalo;
 using EntityFrameworkCore.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Services.Implementations
@@ -22,36 +24,43 @@ namespace Services.Implementations
             _mapper = mapper;
         }
 
-        public async Task<UserDto> CreateUserAsync(CreateUserDto dto)
+        public async Task<List<UserDto>> GetAllUsersAsync()
         {
-            await CheckDuplicateUser(dto);
+            return await _unitOfWork.GetRepository<User>()
+                .GetAll()
+                .Select(x => _mapper.Map<UserDto>(x))
+                .ToListAsync();
+        }
 
+        public async Task<UserDto> GetUserAsync(Guid id)
+        {
+            return await _unitOfWork.GetRepository<User>()
+                .GetAll()
+                .Select(x => _mapper.Map<UserDto>(x))
+                .FirstOrDefaultAsync(x => x.Id == id);
+        }
+
+        public async Task CreateUserAsync(CreateUserDto dto)
+        {
             var user = _mapper.Map<User>(dto);
-
-            var newUser = await _unitOfWork.GetRepository<User>().InsertAsync(user);
-
+            await _unitOfWork.GetRepository<User>().InsertAsync(user);
             await _unitOfWork.CompleteAsync();
-
-            return await GetUserAsync(newUser.Id);
         }
 
-        private async Task CheckDuplicateUser(CreateUserDto dto)
-        {
-            var existUser = await _unitOfWork.GetRepository<User>().GetAll().FirstOrDefaultAsync(x => x.UserName.Trim().ToUpper() == dto.UserId.Trim().ToUpper());
-
-            if (existUser != null)
-            {
-                throw new BusinessException(ExceptionResource.DuplicationEmail);
-            }
-        }
-
-        public async Task<UserDto> GetUserAsync(Guid userId)
+        public async Task UpdateUserAsync(UserDto dto)
         {
             var userFromDb = await _unitOfWork.GetRepository<User>()
                 .GetAll()
-                .FirstOrDefaultAsync(x => x.Id == userId);
+                .FirstOrDefaultAsync(x => x.Id == dto.Id);
 
-            return _mapper.Map<UserDto>(userFromDb);
+            var user = _mapper.Map(dto, userFromDb);
+            await _unitOfWork.GetRepository<User>().UpdateAsync(user);
+            await _unitOfWork.CompleteAsync();
+        }
+
+        public async Task DeleteUserAsync(Guid id)
+        {
+            await _unitOfWork.GetRepository<User>().DeleteAsync(id);
         }
     }
 }

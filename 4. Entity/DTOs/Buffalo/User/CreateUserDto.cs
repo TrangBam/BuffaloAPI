@@ -1,21 +1,17 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 
 namespace DTOs.Buffalo.User
 {
     public class CreateUserDto
     {
-        public string UserId { get; set; }
+        [JsonProperty("name")]
+        public string Name { get; set; }
 
-        public string Password { get; set; }
-
-        public string UserName { get; set; }
-
-        public string System { get; set; }
-
+        [JsonProperty("day_of_birth")]
         public DateTime DayOfBirth { get; set; }
 
-        public bool Sex { get; set; }
-
-        public string PhoneNumber { get; set; }
+        [JsonProperty("address")]
+        public string Address { get; set; }
     }
 }

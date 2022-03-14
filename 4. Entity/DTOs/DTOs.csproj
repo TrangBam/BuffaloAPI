@@ -12,4 +12,8 @@
     <PackageReference Include="FluentValidation.AspNetCore" Version="9.4.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Validators\User\" />
+  </ItemGroup>
+
 </Project>

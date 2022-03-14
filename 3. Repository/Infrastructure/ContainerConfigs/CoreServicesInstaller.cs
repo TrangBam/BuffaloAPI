@@ -37,7 +37,7 @@ namespace Infrastructure.ContainerConfigs
                 .AddFluentValidation(fvc => fvc.RegisterValidatorsFromAssemblyContaining(typeof(IValidator)));
 
             services.Configure<SmtpConfig>(configuration.GetSection(nameof(SmtpConfig)));
-            services.AddDbContextPool<AlcareDbContext>(_ => { });
+            services.AddDbContext<AlcareDbContext>(_ => { });
             services.AddScoped<IUnitOfWork, UnitOfWork<AlcareDbContext>>();
             services.AddScoped<IUnitOfWork<AlcareDbContext>, UnitOfWork<AlcareDbContext>>();
             services.AddScoped<IRepositoryFactory, UnitOfWork<AlcareDbContext>>();

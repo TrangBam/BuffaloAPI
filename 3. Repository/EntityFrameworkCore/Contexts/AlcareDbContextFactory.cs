@@ -15,7 +15,7 @@ namespace EntityFrameworkCore.Contexts
                 .Build();
 
             var optionsBuilder = new DbContextOptionsBuilder<AlcareDbContext>();
-            optionsBuilder.UseSqlServer(configuration.GetConnectionString("Development"));
+            optionsBuilder.UseNpgsql(configuration.GetConnectionString("Development"));
 
             return new AlcareDbContext(optionsBuilder.Options);
         }

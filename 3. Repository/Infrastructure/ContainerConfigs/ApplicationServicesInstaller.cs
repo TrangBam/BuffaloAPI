@@ -17,7 +17,6 @@ namespace Infrastructure.ContainerConfigs
         {
             services.AddScoped<IAuditHelper, AuditHelper>();
             services.AddSingleton<ITokenService, JwtTokenService>();
-            services.AddTransient<ILoginService, LoginService>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<ISendMailService, SendMailService>();
             services.TryAddSingleton<IActionContextAccessor, ActionContextAccessor>();

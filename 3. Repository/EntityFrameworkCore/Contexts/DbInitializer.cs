@@ -21,15 +21,9 @@ namespace EntityFrameworkCore.Contexts
             context.Users.Add(new User
             {
                 Id = Guid.NewGuid(),
-                IsAlive = false,
-                CreatedDate = DateTime.Now,
-                Email = "admin",
-                Password = EncryptPassword("1"),
-                UserName = "admin",
-                DayOfBirth = Convert.ToDateTime("2020/12/09"),
-                Gender = true,
-                PhoneNumber = "0932491054",
-                IsActive = true
+                Name = "Nguyễn Đình Bình",
+                DayOfBirth = Convert.ToDateTime("1997/06/28"),
+                Address = "35 Núi Thành, Hòa Thuận Đông, Hải Châu, Đà Nẵng",
             });
 
             context.SaveChanges();

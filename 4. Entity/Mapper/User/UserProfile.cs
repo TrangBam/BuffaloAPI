@@ -13,8 +13,10 @@ namespace Mapper.User
                 .IgnoreAllNonExisting();
 
             CreateMap<CreateUserDto, Entities.Buffalo.User>()
-                .IgnoreAllNonExisting()
-                .ForMember(x => x.Password, otp => otp.MapFrom(p => LoginHelper.EncryptPassword(p.Password)));
+                .IgnoreAllNonExisting();
+
+            CreateMap<UserDto, Entities.Buffalo.User>()
+                .IgnoreAllNonExisting();
         }
     }
 }
